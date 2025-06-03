@@ -1,0 +1,22 @@
+{
+    "config": {
+        "interview_type": "Technical",
+        "difficulty_level": "Medium",
+        "num_questions": 2,
+        "topics_to_cover": "Computer Networks, TCP/IP"
+    },
+    "questions": [
+        "Explain the three-way handshake process in TCP and why it's necessary for establishing a reliable connection. Detail a scenario where the handshake might fail and how the system would handle it.",
+        "Describe the differences between TCP and UDP protocols. Provide use-case examples where you would choose one over the other and explain your reasoning."
+    ],
+    "answers": [
+        {
+            "question": "Explain the three-way handshake process in TCP and why it's necessary for establishing a reliable connection. Detail a scenario where the handshake might fail and how the system would handle it.",
+            "answer": "answer1"
+        },
+        {
+            "question": "Describe the differences between TCP and UDP protocols. Provide use-case examples where you would choose one over the other and explain your reasoning.",
+            "answer": "answer2"
+        }
+    ]
+}

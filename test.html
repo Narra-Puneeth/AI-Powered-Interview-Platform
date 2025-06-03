@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interview Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #007bff;
+    }
+
+    .summary, .question {
+      background-color: #fff;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .question {
+      border-left: 5px solid #17a2b8;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .score {
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interview Feedback Report</h1>
+  <div id="summary" class="summary"></div>
+  <h2>Detailed Feedback</h2>
+  <div id="feedback-list"></div>
+
+  <script>
+    async function loadFeedback() {
+      try {
+        const res = await fetch('feedback.json');
+        const data = await res.json();
+
+        // Render Summary
+        const summaryDiv = document.getElementById('summary');
+        const summary = data.Summary;
+
+        summaryDiv.innerHTML = `
+          <p><span class="label">Assessment:</span> ${summary.Assessment}</p>
+          <p><span class="label">Strengths:</span> ${summary.Strengths}</p>
+          <p><span class="label">Areas for Improvement:</span> ${summary.Improvements}</p>
+          <p><span class="label">Overall Score:</span> <span class="score">${summary.Score}</span></p>
+        `;
+
+        // Render Feedback List
+        const feedbackList = document.getElementById('feedback-list');
+        data.Feedback.forEach((item, index) => {
+          const feedbackBlock = document.createElement('div');
+          feedbackBlock.className = 'question';
+          feedbackBlock.innerHTML = `
+            <p><span class="label">Q${index + 1}:</span> ${item.Question}</p>
+            <p><span class="label">Your Answer:</span> ${item.answer}</p>
+            <p><span class="label">Score:</span> <span class="score">${item.Score}</span></p>
+            <p><span class="label">Feedback:</span> ${item.Feedback}</p>
+          `;
+          feedbackList.appendChild(feedbackBlock);
+        });
+
+      } catch (err) {
+        document.body.innerHTML = '<p style="color: red;">Failed to load feedback.json. Make sure it\'s served via a local server.</p>';
+        console.error(err);
+      }
+    }
+
+    loadFeedback();
+  </script>
+</body>
+</html>
